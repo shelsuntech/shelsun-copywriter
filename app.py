@@ -35,7 +35,7 @@ if st.button("Generate Premium Ad Copy") and niche_input:
         try:
             # Replicating your Google AI Studio parameters perfectly
             model = genai.GenerativeModel(
-                model_name="gemini-3.5-flaslite",
+                model_name="gemini-3.5-flash",
                 generation_config={"temperature": 0.3},
                 system_instruction=(
                     "You are an elite, high-ticket US Direct-Response Copywriter. "
