@@ -54,24 +54,33 @@ platform = st.selectbox(
 )
 
 # 🧠 5. Dynamic Platform Logic Setup
-platform_instructions = ""
 if "Facebook" in platform:
     platform_instructions = (
-        "Format the ad perfectly for Facebook and Instagram feeds. Use a highly engaging, emotional tone. "
-        "Include natural, scroll-stopping emojis, and a compelling, narrative-driven primary text section."
+        "Format the ad perfectly for Facebook and Instagram feeds. Use a highly engaging, emotional tone.\n"
+        "You must instantly reply with exactly three items formatted cleanly:\n"
+        "1. 🔥 THE HOOK: A punchy, single-sentence headline that stops a user from scrolling.\n"
+        "2. ✍️ PRIMARY TEXT/BODY: A short, persuasive 3-paragraph description using the AIDA framework (Attention, Interest, Desire, Action). Use conversational American English and natural emojis.\n"
+        "3. 🎯 CALL TO ACTION (CTA): Tell the customer exactly what to do next."
     )
 elif "Google" in platform:
     platform_instructions = (
-        "Format the ad perfectly for Google Search text ads. STRICTLY OMIT ALL EMOJIS. "
-        "Instead of st paragraphs, structure the output precisely as:\n"
-        "Headline 1 (Max 30 chars), Headline 2 (Max 30 chars), Headline 3 (Max 30 chars)\n"
-        "Description 1 (Max 90 chars), Description 2 (Max 90 chars).\n"
-        "Focus heavily on hyper-local keywords and high buyer intent."
+        "Format the ad perfectly for Google Search text ads. Use a high buyer-intent tone. STRICTLY OMIT ALL EMOJIS.\n"
+        "You must instantly reply with exactly two sections formatted cleanly:\n"
+        "HEADLINES:\n"
+        "- Headline 1 (Max 30 chars): [Insert Headline]\n"
+        "- Headline 2 (Max 30 chars): [Insert Headline]\n"
+        "- Headline 3 (Max 30 chars): [Insert Headline]\n\n"
+        "DESCRIPTIONS:\n"
+        "- Description 1 (Max 90 chars): [Insert Description]\n"
+        "- Description 2 (Max 90 chars): [Insert Description]"
     )
 elif "LinkedIn" in platform:
     platform_instructions = (
-        "Format the ad for a professional B2B audience on LinkedIn. Use an executive, high-authority tone. "
-        "Limit emoji usage significantly. Focus heavily on business value propositions, ROI, dependability, and professional case metrics."
+        "Format the ad for a professional B2B audience on LinkedIn. Use an executive, high-authority tone. Do not use informal emojis.\n"
+        "You must instantly reply with exactly three items formatted cleanly:\n"
+        "1. 🏢 THE HOOK: A professional, stat-driven or ROI-focused single-sentence headline.\n"
+        "2. 📊 PRIMARY TEXT: A persuasive 2-paragraph description focusing on business value, dependability, and professional case metrics.\n"
+        "3. 🔗 CALL TO ACTION (CTA): A professional prompt to schedule a consultation, audit, or estimate."
     )
 
 # 🚀 6. Execute Generation
@@ -85,20 +94,15 @@ if st.button("Generate Premium Ad Copy") and niche_input:
                     f"You are an elite, high-ticket US Direct-Response Copywriter. "
                     f"Your job is to write high-converting ad copy tailored perfectly for local service businesses.\n\n"
                     f"{platform_instructions}\n\n"
-                    f"When the user gives you a business niche and location, you must instantly reply with exactly three items formatted cleanly:\n"
-                    f"1. 🔥 THE HOOK: A punchy, single-sentence headline that stops a user from scrolling or captures immediate search intent.\n"
-                    f"2. ✍️ PRIMARY TEXT/BODY: A short, persuasive 3-paragraph description using the AIDA framework (Attention, Interest, Desire, Action). Use conversational American English.\n"
-                    f"3. 🎯 CALL TO ACTION (CTA): Tell the customer exactly what to do next.\n\n"
                     f"CRITICAL RULES:\n"
                     f"- Never include conversational introductory text like 'Sure, here is your copy!' or 'Hope this helps!'\n"
-                    f"- Start directly with the Hook.\n"
+                    f"- Start directly with the first line of the ad format.\n"
                     f"- Avoid robotic clichés like 'Look no further' or 'Revolutionize your experience.'"
                 )
             )
             
             response = model.generate_content(niche_input)
             
-            # Display output inside a premium styled text container
             st.success("Ad Copy Generated Successfully!")
             st.markdown(response.text)
             
